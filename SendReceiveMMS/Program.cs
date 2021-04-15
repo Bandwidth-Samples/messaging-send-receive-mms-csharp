@@ -11,22 +11,22 @@ namespace SendReceiveMMS
     class Program
     {
         // Bandwidth provided messaging token.
-        private static readonly string Token = System.Environment.GetEnvironmentVariable("BANDWIDTH_MESSAGING_TOKEN");
+        private static readonly string Token = System.Environment.GetEnvironmentVariable("BW_USERNAME");
         
         // Bandwidth provided messaging secret.
-        private static readonly string Secret = System.Environment.GetEnvironmentVariable("BANDWIDTH_MESSAGING_SECRET");
+        private static readonly string Secret = System.Environment.GetEnvironmentVariable("BW_PASSWORD");
 
         // Bandwidth provided application id.
-        private static readonly string ApplicationId = System.Environment.GetEnvironmentVariable("BANDWIDTH_MESSAGING_APPLICATION_ID");
+        private static readonly string ApplicationId = System.Environment.GetEnvironmentVariable("BW_MESSAGING_APPLICATION_ID");
 
         // Bandwidth provided account id.
-        private static readonly string AccountId = System.Environment.GetEnvironmentVariable("BANDWIDTH_ACCOUNT_ID");
+        private static readonly string AccountId = System.Environment.GetEnvironmentVariable("BW_ACCOUNT_ID");
 
         // The phone number to send the message from.
-        private static readonly string From = System.Environment.GetEnvironmentVariable("BANDWIDTH_FROM");
+        private static readonly string From = System.Environment.GetEnvironmentVariable("BW_NUMBER");
         
         // The phone number to send the message to.
-        private static readonly string To = System.Environment.GetEnvironmentVariable("BANDWIDTH_TO");
+        private static readonly string To = System.Environment.GetEnvironmentVariable("USER_NUMBER");
 
         // The media to send to the "to" phone number.
         private static readonly string Media = "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg";
