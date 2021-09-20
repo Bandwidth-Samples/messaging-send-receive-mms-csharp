@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bandwidth.Sdk" Version="3.11.2" />
+    <PackageReference Include="Bandwidth.Sdk" Version="7.0.0" />
   </ItemGroup>
 
 </Project>
