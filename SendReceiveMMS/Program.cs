@@ -63,7 +63,6 @@ app.MapPost("/sendMessages", async (HttpContext context) =>
         {
             // Send a message
             var result = await apiInstance.CreateMessageAsync(BW_ACCOUNT_ID, request);
-            Console.WriteLine(result);
         }
         catch (ApiException e)
         {

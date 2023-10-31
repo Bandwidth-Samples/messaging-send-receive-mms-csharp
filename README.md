@@ -18,7 +18,7 @@
 
 <!-- /TOC -->
 
-# Description
+# Description  
 Using a tool capable of making POST requests such as [Postman](https://www.postman.com/), send a `POST` request to the `/sendMessage` endpoint with a json body containing the `to` and `text` fields. The `to` field should be an array of E.164 formatted phone numbers to send the SMS to.
 
 ```json
@@ -45,7 +45,6 @@ For more information about API credentials see our [Account Credentials](https:/
 # Running the Application
 
 From the `sendReceiveMMS` directory, use the following command to run the application:
-
 ```sh
 dotnet run
 ```
