@@ -44,8 +44,6 @@ app.MapPost("/sendMessages", async (HttpContext context) =>
             requestBody = JsonConvert.DeserializeObject<Dictionary<string,string>>(body);
         }
 
-        context.Request.ContentType = "application/json";
-
         MessageRequest request = new MessageRequest(
             applicationId: BW_MESSAGING_APPLICATION_ID,
             to: new List<string> { requestBody["to"] },
@@ -103,7 +101,7 @@ app.MapPost("/callbacks/inbound/messaging", async (HttpContext context) =>
         var body = await streamReader.ReadToEndAsync();
         requestBody = JsonConvert.DeserializeObject<List<object>>(body);
     }
-
+    
     var type = (string)((dynamic)requestBody[0]).type;
     
     if(type.Equals("message-received"))
