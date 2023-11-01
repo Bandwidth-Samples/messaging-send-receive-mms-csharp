@@ -35,7 +35,7 @@ Configuration configuration = new Configuration();
 configuration.Username = BW_USERNAME;
 configuration.Password = BW_PASSWORD;
 
-app.MapPost("/sendMessages", async (HttpContext context) =>
+app.MapPost("/sendMessage", async (HttpContext context) =>
     {
         var requestBody = new Dictionary<string, string>();
         using(var streamReader = new StreamReader(context.Request.Body))

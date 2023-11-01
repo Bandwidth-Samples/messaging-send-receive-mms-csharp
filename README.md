@@ -19,11 +19,14 @@
 <!-- /TOC -->
 
 # Description  
-Using a tool capable of making POST requests such as [Postman](https://www.postman.com/), send a `POST` request to the `/sendMessage` endpoint with a json body containing the `to` and `text` fields. The `to` field should be an array of E.164 formatted phone numbers to send the SMS to.
+Using a tool capable of making POST requests such as [Postman](https://www.postman.com/), send a `POST` request to the `/sendMessage` endpoint with a json body containing the `to` and `text` fields. The `to` field should be an array of E.164 formatted phone numbers to send the MMS to.
 
-```json
+```http
+POST /sendMessage
+Host: localhost:5001
+Content-Type: application/json
 {
-  "to": ["+19195551234"],
+  "to": "+19195551234",
   "text": "Hello World!"
 }
 ```
@@ -38,7 +41,7 @@ Inbound callbacks are sent notifying you of a received message on a Bandwidth nu
 
 In order to use the Bandwidth API users need to set up the appropriate application at the [Bandwidth Dashboard](https://dashboard.bandwidth.com/) and create API tokens.
 
-To create an application log into the [Bandwidth Dashboard](https://dashboard.bandwidth.com/) and navigate to the `Applications` tab.  Fill out the **New Application** form selecting the service that the application will be used for (this sample app uses a messaging application).  All Bandwidth services require publicly accessible Callback URLs, for more information on how to set one up see [Callback URLs](#callback-urls).
+To create an application log into the [Bandwidth Dashboard](https://dashboard.bandwidth.com/) and navigate to the `Applications` tab.  Fill out the **New Application** form selecting the service that the application will be used for (this sample app uses a messaging application). Make sure that your messaging application has MMS enabled. All Bandwidth services require publicly accessible Callback URLs, for more information on how to set one up see [Callback URLs](#callback-urls).
 
 For more information about API credentials see our [Account Credentials](https://dev.bandwidth.com/docs/account/credentials) page.
 
@@ -56,8 +59,9 @@ USER_NUMBER                          # The user's phone number involved with thi
 
 # Running the Application
 
-From the `sendReceiveMMS` directory, use the following command to run the application:
+Use the following command to run the application:
 ```sh
+cd SendReceiveMMS/
 dotnet run
 ```
 
