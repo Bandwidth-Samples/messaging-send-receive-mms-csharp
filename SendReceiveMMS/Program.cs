@@ -15,7 +15,6 @@ string BW_NUMBER;
 string USER_NUMBER;
 string Media = "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg";
 
-//Setting up environment variables
 try
 {
     BW_USERNAME = Environment.GetEnvironmentVariable("BW_USERNAME");
@@ -38,7 +37,6 @@ configuration.Password = BW_PASSWORD;
 
 app.MapPost("/sendMessages", async (HttpContext context) =>
     {
-        // Deserialize the request a list of key valued pairs
         var requestBody = new Dictionary<string, string>();
         using(var streamReader = new StreamReader(context.Request.Body))
         {
@@ -78,10 +76,8 @@ app.MapPost("/callbacks/outbound/messaging/status", async (HttpContext context) 
         requestBody = JsonConvert.DeserializeObject<List<object>>(body);
     }
 
-    // Access the "type" property of the first object in the list
     var type = (string)((dynamic)requestBody[0]).type;
     
-    // switch case statement
     switch (type)
     {
         case "message-sending":
@@ -108,7 +104,6 @@ app.MapPost("/callbacks/inbound/messaging", async (HttpContext context) =>
         requestBody = JsonConvert.DeserializeObject<List<object>>(body);
     }
 
-    // Access the "type" property of the first object in the list
     var type = (string)((dynamic)requestBody[0]).type;
     
     if(type.Equals("message-received"))
