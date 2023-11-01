@@ -1,5 +1,3 @@
-using System.Linq.Expressions;
-using Bandwidth.Standard;
 using Bandwidth.Standard.Api;
 using Bandwidth.Standard.Client;
 using Bandwidth.Standard.Model;
@@ -9,28 +7,28 @@ using Newtonsoft.Json.Linq;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-// Declare the variables outside the try block
-string BW_USERNAME = null;
-string BW_PASSWORD = null;
-string BW_MESSAGING_APPLICATION_ID = null;
-string BW_ACCOUNT_ID = null;
-string BW_NUMBER = null;
-string USER_NUMBER = null;
+string BW_USERNAME;
+string BW_PASSWORD;
+string BW_MESSAGING_APPLICATION_ID;
+string BW_ACCOUNT_ID;
+string BW_NUMBER;
+string USER_NUMBER;
 string Media = "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg";
 
 //Setting up environment variables
 try
 {
-    BW_USERNAME = System.Environment.GetEnvironmentVariable("BW_USERNAME");
-    BW_PASSWORD = System.Environment.GetEnvironmentVariable("BW_PASSWORD");
-    BW_MESSAGING_APPLICATION_ID = System.Environment.GetEnvironmentVariable("BW_MESSAGING_APPLICATION_ID");
-    BW_ACCOUNT_ID = System.Environment.GetEnvironmentVariable("BW_ACCOUNT_ID");
-    BW_NUMBER = System.Environment.GetEnvironmentVariable("BW_NUMBER");
-    USER_NUMBER = System.Environment.GetEnvironmentVariable("USER_NUMBER");
+    BW_USERNAME = Environment.GetEnvironmentVariable("BW_USERNAME");
+    BW_PASSWORD = Environment.GetEnvironmentVariable("BW_PASSWORD");
+    BW_MESSAGING_APPLICATION_ID = Environment.GetEnvironmentVariable("BW_MESSAGING_APPLICATION_ID");
+    BW_ACCOUNT_ID = Environment.GetEnvironmentVariable("BW_ACCOUNT_ID");
+    BW_NUMBER = Environment.GetEnvironmentVariable("BW_NUMBER");
+    USER_NUMBER = Environment.GetEnvironmentVariable("USER_NUMBER");
 }
-catch (System.Exception)
+catch (Exception)
 {
     Console.WriteLine("Please set the environmental variables defined in the README");
+    Environment.Exit(-1);
     throw;
 }
 
@@ -121,21 +119,19 @@ app.MapPost("/callbacks/inbound/messaging", async (HttpContext context) =>
 
         var mediaApi = new MediaApi(configuration);
 
-        string mediaId = null;
-        string mediaName = null;
         foreach ( string item in (JArray)((dynamic)requestBody[0]).message.media)
         {
-            mediaId = item.Split(new string[] { "media/" }, StringSplitOptions.None).Last(); // gets the media ID used for GET media
+            string mediaId = item.Split(new string[] { "media/" }, StringSplitOptions.None).Last(); // gets the media ID used for GET media
             string[] mediaParts = mediaId.Split('/');
-            mediaName = mediaParts[mediaParts.Length - 1]; // gets the name of the downloaded media file
-        }
-
-        if(!mediaName.Contains(".xml"))
-        {
-            var mediaFile = mediaApi.GetMedia(BW_ACCOUNT_ID, mediaId);
-            using (var fileStream = File.Create(mediaName))
+            string mediaName = mediaParts[mediaParts.Length - 1]; // gets the name of the downloaded media file
+            
+            if(!mediaName.Contains(".xml"))
             {
-                mediaFile.CopyTo(fileStream);
+                var mediaFile = mediaApi.GetMedia(BW_ACCOUNT_ID, mediaId);
+                using (var fileStream = File.Create(mediaName))
+                {
+                    mediaFile.CopyTo(fileStream);
+                }
             }
         }
     }
