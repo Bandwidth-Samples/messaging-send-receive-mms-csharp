@@ -72,10 +72,10 @@ Below are the callback paths:
 ## Ngrok
 
 A simple way to set up a local callback URL for testing is to use the free tool [ngrok](https://ngrok.com/).  
-After you have downloaded and installed `ngrok` run the following command to open a public tunnel to your port (`$LOCAL_PORT`)
+After you have downloaded and installed `ngrok` run the following command to open a public tunnel to your port (in this case port 5001). 
 
 ```cmd
-ngrok http 8000
+ngrok http 5001
 ```
-
 You can view your public URL at `http://127.0.0.1:4040` after ngrok is running.  You can also view the status of the tunnel and requests/responses here.
+note: If you would like to change your port number feel free to do so. However, if you do change the port here you will also need to change the port appended to the application URL in the `launchSettings.json` file in the Properties directory.
