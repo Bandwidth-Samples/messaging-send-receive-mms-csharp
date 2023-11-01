@@ -11,8 +11,8 @@
 - [Table of Contents](#table-of-contents)
 - [Description](#description)
 - [Pre-Requisites](#pre-requisites)
-- [Running the Application](#running-the-application)
 - [Environmental Variables](#environmental-variables)
+- [Running the Application](#running-the-application)
 - [Callback URLs](#callback-urls)
   - [Ngrok](#ngrok)
 
@@ -42,13 +42,6 @@ To create an application log into the [Bandwidth Dashboard](https://dashboard.ba
 
 For more information about API credentials see our [Account Credentials](https://dev.bandwidth.com/docs/account/credentials) page.
 
-# Running the Application
-
-From the `sendReceiveMMS` directory, use the following command to run the application:
-```sh
-dotnet run
-```
-
 # Environmental Variables
 
 The sample app uses the below environmental variables.
@@ -59,6 +52,13 @@ BW_PASSWORD                          # Your Bandwidth API Password
 BW_MESSAGING_APPLICATION_ID          # Your Messaging Application Id created in the dashboard
 BW_NUMBER                            # The Bandwidth phone number involved with this application
 USER_NUMBER                          # The user's phone number involved with this application
+```
+
+# Running the Application
+
+From the `sendReceiveMMS` directory, use the following command to run the application:
+```sh
+dotnet run
 ```
 
 # Callback URLs

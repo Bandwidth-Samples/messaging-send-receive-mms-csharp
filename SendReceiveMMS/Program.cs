@@ -101,14 +101,16 @@ app.MapPost("/callbacks/inbound/messaging", async (HttpContext context) =>
         var body = await streamReader.ReadToEndAsync();
         requestBody = JsonConvert.DeserializeObject<List<object>>(body);
     }
-    
+
     var type = (string)((dynamic)requestBody[0]).type;
     
     if(type.Equals("message-received"))
     {
-        var to = (string)((dynamic)requestBody[0]).message.to[0];
         var from = (string)((dynamic)requestBody[0]).message.from;
+        var to = (string)((dynamic)requestBody[0]).message.to[0];
         var text = (string)((dynamic)requestBody[0]).message.text;
+
+        Console.WriteLine($"Message received from '{from}' to '{to}' with text '{text}'.");
 
         var mediaApi = new MediaApi(configuration);
 
